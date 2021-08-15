@@ -1,0 +1,19 @@
+body{
+    top: 0%; left: 0%;
+    margin-left: 0%;
+    overflow-x: hidden;
+    width: 100%; height: 100%;
+}
+
+@font-face{
+ src: url("../fonts/Karla-Regular.ttf");   
+ font-family:primaryf;
+}
+@font-face{
+ src: url("../fonts/SourceSansPro-Regular.ttf");   
+ font-family:pregularf;
+}
+@font-face{
+ src: url("../fonts/leaguespartan-bold.ttf"); 
+ font-family:headerboldf;
+}

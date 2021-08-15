@@ -1,0 +1,131 @@
+<html >
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+<title > boolean game</title>
+<noscript>Unfortunately, JavaScript must be enabled in your browser</noscript>
+    
+    
+    
+<head>
+<script src="http://localhost:1111/CodeHelps/src/CodeHelps.js"></script>
+<script src="http://localhost:1111/CDraw/src/CDraw.js"></script>
+<script src="http://localhost:1111/CDraw/src/CDrawf.styleBg.js"></script>
+<script 
+src="https://aydavidgithere.github.io/CodeHelps/src/CodeHelps.js"></script>
+<script src="https://aydavidgithere.github.io/CDraw/src/CDraw.js"></script>
+<script 
+src="https://aydavidgithere.github.io/CDraw/src/CDrawf.styleBg.js"></script>
+<style>
+body{
+    width: 100%; height: 100%;
+    background-color: #111112;
+    color: white;
+}
+#squareBox{
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    box-shadow: 1px 1px 5px -1px black; 
+    border-radius: 8px;
+    background-color: inherit;
+    overflow: hidden;
+    box-sizing: content-box;
+    position: relative;
+}
+.sqs{width: 50%; height: 50%; background-color: inherit; 
+    border-width: 0.5rem 0.5rem 0.5rem 0.5rem; border-style: solid;
+    float: left; box-sizing: border-box;
+    position: absolute; 
+    color: white; text-align: center; font-weight: bold;
+    vertical-align: middle; font-size: 30px;
+}
+#sqs-4{ border-color: green;  top: 50%; left: 50%; }
+#sqs-3{ border-color: yellow; top: 50%; left: 0%;  }
+#sqs-2{ border-color: red; top: 0%; left: 50%; }
+#sqs-1{ border-color: blue; top: 0%; left: 0%;}
+    
+#TimerText{
+    text-align: center;
+    color: blue; font-weight: bold; font-size: 50px;
+}
+#TimerText[state="down"]{color: red;}
+#TimerText[state="up"]{color: green;}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+    
+    var TimerVal = 500;
+    var TimerText = document.getElementById("TimerText");
+    var sqs = [...document.getElementsByClassName("sqs")];
+    var sqsGVals = []
+    var onHit = false;
+    
+    function to4s(val){return Math.floor(val/4)*4; }
+    function ReloadSqs(){
+        sqsGVals = []
+        sqs.map((sq)=>{
+            sq.innerText = gVal = sq.getAttribute("g-val");
+            sqsGVals.push(gVal);
+        });
+    }
+    function MakeHit(val, ind){
+        let newVal = to4s(val/2);
+        sqsGVals.map((gVal)=>{
+            if(val/2 == gVal){ newVal= (val*2);}
+        })
+        return newVal;
+    }
+    function CheckHit(){
+        for(let gValInd=0; sqsGVals.length>gValInd; gValInd++){
+            let gVal = sqsGVals[gValInd]; console.log(gVal, to4s(gVal))
+            if(gVal==to4s(gVal)){ onHit = false; }
+            else{ onHit = true; break;}
+        }
+    }
+    sqs.map((sq, sqInd)=>{
+        sq.setAttribute("g-val", to4s(26+Math.random()*26));
+        sq.onclick = ()=>{
+            let gVal = Number(sq.getAttribute("g-val"));
+            let new_gVal = gVal/2;//MakeHit(gVal, sqInd);
+            sq.setAttribute("g-val", new_gVal);
+            ReloadSqs();
+            CheckHit();
+        }
+    });
+    ReloadSqs();
+    function setTime(){
+        if(onHit){TimerVal -= 4; 
+            TimerText.innerText = TimerVal;
+            TimerText.setAttribute("state", "down")
+        }
+        setTimeout(setTime, 500);
+    }
+    setTime();
+    
+})
+</script>
+</head>
+        
+        
+<body>
+
+<div id="gameBox">
+<p id="TimerText">500</p>
+<div id="squareBox">
+    <div class="sqs" id="sqs-1"></div>
+    <div class="sqs" id="sqs-2">S-2</div>
+    <div class="sqs" id="sqs-3">S-3</div>
+    <div class="sqs" id="sqs-4">S-4</div>
+</div>
+</div>
+
+<input type="checkbox" id="check1" hidden />
+<input type="checkbox" id="check2" hidden />
+<input type="checkbox" id="check3" hidden />
+    
+</body>
+    
+    
+    
+    
+    
+</html>  
