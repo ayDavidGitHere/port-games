@@ -11,3 +11,10 @@ M1.objectProt = {e: "logEdited objectProt"};
 
 console.log( M1.objectProt );
 console.log( new Class.Method1().objectProt )
+
+
+
+x = 500;
+rad = 3.2;
+aboutx = 0
+realx = 
