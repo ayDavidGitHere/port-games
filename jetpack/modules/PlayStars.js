@@ -26,8 +26,8 @@ try{
     let sunColor = "goldenrod";  "#febb22"
     let sunArc = new CDraw.arc(0, 0, CW/15*40, 0, 6.3, "_"+sunColor);
     sunArc.alpha = 0.9;
-    sunArc.x = 0+sunArc.radius*-0.7;    
-    sunArc.y = 0+sunArc.radius*-0.7; 
+    sunArc.x = CW/2;    
+    sunArc.y = CH+sunArc.radius; 
     sunArc.initRadius = sunArc.radius
     sunArc.GCParams.shadow = [1, 1, sunColor, sunArc.radius*2];
     
@@ -46,7 +46,7 @@ try{
     
     
     let tStars = []
-    for(let i=0; 120>i; i++){
+    for(let i=0; 60>i; i++){
     let tStarColor = MHelp.randOpt("white", "crimson", "goldenrod")
     let tStar = new CDraw.arc(CW/2, CH/2, CW/5, 0, 6.3, "_"+tStarColor);
 
@@ -80,15 +80,15 @@ try{
         
         
         tStars.map((tStar)=>{
-            //tStar.x--;
-            if(tStar.x<0 && false){    
+            tStar.x--;
+            if(tStar.x<0 ){    
                 tStar.x = CW+Math.random()*CW; tStar.y = Math.random()*CH;
                 tStar.radius = 0.2+Math.random()*0.9; 
                 tStar.color = 
                 MHelp.randOpt("white", "crimson", "goldenrod")
             }
-            tStar.rotation.rad += tStar.rotationSpeed;
-            tStar.rotation.about = sunArc.center;
+            //tStar.rotation.rad += tStar.rotationSpeed;
+            //tStar.rotation.about = sunArc.center;
         })//EO map
         
         
@@ -98,8 +98,16 @@ try{
         mercuryArc.rotation.rad += 0.003;
         mercuryArc.rotation.about = sunArc.center;
         
+        earthArc.realX = earthArc.rotation.about.x+
+        Math.cos(earthArc.rotation.rad)*
+        (earthArc.x-earthArc.rotation.about.x);
+        earthArc.realY = 
+        earthArc.rotation.about.y+
+        Math.sin(earthArc.rotation.rad)*
+        (earthArc.y-earthArc.rotation.about.y);
+        console.log(earthArc.realX, earthArc.realY)
         
-        if(touched.active)sunArc.radius/= 1.02;
+        if(touched.active && false)sunArc.radius/= 1.02;
         else if(sunArc.initRadius > sunArc.radius)sunArc.radius*=1.02;
         
         
