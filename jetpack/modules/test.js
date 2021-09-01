@@ -54,3 +54,71 @@ function send(val){
     if(val==4){}
     else{realArr.push(val)}
 }
+
+
+
+r = 110
+R = (255-r)+(255/2)/(255/2-r);
+console.log(R)
+
+
+//57.3 = console.log(180/Math.PI);
+ang= 6.283/4; //180/180*Math.PI;//180*6.3/Math.PI
+console.log("ang: ", ang,  "", Math.cos(ang), Math.sin(ang));
+
+
+function ckAng(x,a,b){return (a<b?(x>a&&x<b):(x<a&&x<b));}
+//function ckAng(a,b,x){return(x>Math.min(a,b)&&x<Math.max(a,b))}
+console.log(ckAng(0.04,0,6.3));
+console.log(ckAng(0.04, 1.5, 5-(6.3-1.5)));
+
+
+
+obj = {obj:"obj"}
+console.log({obj: "", x:"x", ...obj})
+
+
+
+/**
+ * 
+ *egSpo.x = earthArc.x-earthArc.radius+earthArc.radius*Math.random()*2;
+    egSpo.y = earthArc.y-earthArc.radius+earthArc.radius*Math.random()*2;
+    var hyp = Math.sqrt(
+    Math.pow(egSpo.x-earthArc.x, 2)
+    +Math.pow(egSpo.y-earthArc.y, 2))
+    if(hyp>earthArc.radius){i--; continue;}
+    egSpo.radius= (earthArc.radius/egSposLen*(0.5+Math.random()));;
+    */
+    
+    
+    
+    
+    
+    
+    
+    let gSt = function (x,y,r){
+    let gsArc=new CDraw.arc(x,y,r,0,6.3,"_"+MHelp.randOpt('crimson','gold'));
+    scene.add(gsArc);
+    let rot = -0.005+Math.random()*0.01;
+    let gSpos = [];
+    for(let i=0;20>i;i++){
+    let gSpo=new CDraw.arc(0,0,Math.random()*gsArc.radius/6,0,6.3,"_black");
+    gSpo.x=gSpo.rx=gsArc.x- gsArc.radius+Math.random()*gsArc.radius*2;
+    gSpo.y=gSpo.ry=gsArc.y- gsArc.radius+Math.random()*gsArc.radius*2;
+    var hyp=Math.sqrt(Math.pow(gSpo.x-gsArc.x, 2)+Math.pow(gSpo.y-gsArc.y, 2))
+    if(hyp>gsArc.radius){i--; continue;}
+    scene.add(gSpo);
+    gSpos.push(gSpo);
+    }
+    let move= ()=>{gsArc.y++; gSpos.map((gSpo)=>{ 
+    gSpo.y++;gSpo.rotation.about=gsArc.center; gSpo.rotation.rad+=rot;})}
+    return {arc: gsArc, gSpos: gSpos, move: move,rot: rot}
+    }
+    let gss=[];
+    for (let i=0; 13>i; i++){
+        let sprad = CW/20+(Math.random()*20)*(CW/20)/20;
+        let lastsp = gss[i-1]; 
+        let spy=(lastsp!=undefined?lastsp.arc.y-lastsp.arc.radius*(2+Math.random()*4)-sprad:-sprad);
+        let gs = new gSt(Math.random()*CW,spy,sprad);
+        gss.push(ss);
+    }
